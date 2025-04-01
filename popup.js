@@ -9,28 +9,40 @@ document.getElementById("summarize-btn").addEventListener("click", async () => {
 
     const pageContent = result[0].result;
 
-    // Call Gemini API for summarization
-    const response = await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash/generateContent", {
+    // Calling Gemini API for summarization
+    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=AIzaSyANy_2T0gJggxzVeCRoICZaTgtqxG0eVpw`, {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
-        Authorization: `AIzaSyANy_2T0gJggxzVeCRoICZaTgtqxG0eVpw`
+        "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        contents: [`Summarize the following text in a concise paragraph:\n\n${pageContent}`],
-        model: "gemini-2.0-flash"
+        contents: [
+          {
+            parts: [
+              {
+                text: `Summarize the following text in a concise paragraph:\n\n${pageContent}`
+              }
+            ]
+          }
+        ]
       })
     });
 
     const data = await response.json();
-    
-    // Extract summary from response
-    const summary = data.contents[0].parts[0].text;
 
-    // Display the summary in the popup
+
+    if (data.candidates && 
+      data.candidates[0] && 
+      data.candidates[0].content && 
+      data.candidates[0].content.parts && 
+      data.candidates[0].content.parts[0]) {
+    const summary = data.candidates[0].content.parts[0].text;
     document.getElementById("summary-result").value = summary.trim();
+    } else {
+    throw new Error("Invalid response structure");
+    }
   } catch (error) {
     console.error("Error summarizing content:", error);
-    document.getElementById("summary-result").value = "Failed to summarize content.";
+    document.getElementById("summary-result").value = "Failed to summarize content: " + error.message;
   }
 });

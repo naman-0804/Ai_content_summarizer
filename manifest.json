@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "Gemini Content Summarizer",
+  "name": "Ai Content Summarizer",
   "version": "1.0",
   "description": "Summarize webpage content using Google Gemini API.",
   "permissions": ["activeTab", "scripting"],
