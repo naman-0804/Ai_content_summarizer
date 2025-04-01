@@ -10,7 +10,7 @@ document.getElementById("summarize-btn").addEventListener("click", async () => {
     const pageContent = result[0].result;
 
     // Calling Gemini API for summarization
-    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=AIzaSyANy_2T0gJggxzVeCRoICZaTgtqxG0eVpw`, {
+    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=your_key_here`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
