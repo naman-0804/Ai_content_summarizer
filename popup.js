@@ -29,18 +29,9 @@ document.getElementById("summarize-btn").addEventListener("click", async () => {
     });
 
     const data = await response.json();
-
-
-    if (data.candidates && 
-      data.candidates[0] && 
-      data.candidates[0].content && 
-      data.candidates[0].content.parts && 
-      data.candidates[0].content.parts[0]) {
     const summary = data.candidates[0].content.parts[0].text;
     document.getElementById("summary-result").value = summary.trim();
-    } else {
-    throw new Error("Invalid response structure");
-    }
+
   } catch (error) {
     console.error("Error summarizing content:", error);
     document.getElementById("summary-result").value = "Failed to summarize content: " + error.message;
