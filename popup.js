@@ -14,7 +14,7 @@ document.getElementById("summarize-btn").addEventListener("click", async () => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `AIzaSyANy_2T0gJggxzVeCRoICZaTgtqxG0eVpw` // Replace with your Gemini API key
+        Authorization: `AIzaSyANy_2T0gJggxzVeCRoICZaTgtqxG0eVpw`
       },
       body: JSON.stringify({
         contents: [`Summarize the following text in a concise paragraph:\n\n${pageContent}`],
